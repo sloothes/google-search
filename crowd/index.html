@@ -475,7 +475,7 @@
 
         //  watch.js
 
-            var intersectWatch = {
+            var intersectWatcher = {
                 a:null, 
                 b:null, 
                 c:null, 
@@ -484,7 +484,7 @@
                 f:null,
             };
 
-            watch( intersectWatch, "a", function(prop, action, newvalue, oldvalue){
+            watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
 
                 debugMode && console.log({
                     "prop": prop,
@@ -704,18 +704,19 @@
                 intersects = ray.intersectObjects( targets );
             
                 if ( intersects[0] ) {
+
                 //  Follow intersects[0] pegman.
                     if ( !!controls ) {
                         controls.focus(intersects[0].object, true); 
                     //  console.log(intersects[0]);
                     }
 
-                    intersectWatch.a = intersects[0].object.uuid;
-                    intersectWatch.b = intersects[1].object.uuid;
-                    intersectWatch.c = intersects[2].object.uuid;
-                    intersectWatch.d = intersects[3].object.uuid;
-                    intersectWatch.e = intersects[4].object.uuid;
-                    intersectWatch.f = intersects[5].object.uuid;
+                    intersectWatcher.a = intersects[0] && intersects[0].object.uuid;
+                    intersectWatcher.b = intersects[1] && intersects[1].object.uuid;
+                    intersectWatcher.c = intersects[2] && intersects[2].object.uuid;
+                    intersectWatcher.d = intersects[3] && intersects[3].object.uuid;
+                    intersectWatcher.e = intersects[4] && intersects[4].object.uuid;
+                    intersectWatcher.f = intersects[5] && intersects[5].object.uuid;
 
                 }
 
