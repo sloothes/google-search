@@ -477,11 +477,11 @@
 
             var intersectWatcher = {
                 a:null, 
-                b:null, 
-                c:null, 
-                d:null, 
-                e:null, 
-                f:null,
+            //  b:null, 
+            //  c:null, 
+            //  d:null, 
+            //  e:null, 
+            //  f:null,
             };
 
             watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
@@ -493,7 +493,7 @@
                     "newvalue": newvalue,
                 });
 
-                if ( newvalue && intersects[0].object.userData.result ) {
+                if ( intersects[0] && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
@@ -712,11 +712,11 @@
                     }
 
                     intersectWatcher.a = intersects[0] && intersects[0].object.uuid;
-                    intersectWatcher.b = intersects[1] && intersects[1].object.uuid;
-                    intersectWatcher.c = intersects[2] && intersects[2].object.uuid;
-                    intersectWatcher.d = intersects[3] && intersects[3].object.uuid;
-                    intersectWatcher.e = intersects[4] && intersects[4].object.uuid;
-                    intersectWatcher.f = intersects[5] && intersects[5].object.uuid;
+                //  intersectWatcher.b = intersects[1] && intersects[1].object.uuid;
+                //  intersectWatcher.c = intersects[2] && intersects[2].object.uuid;
+                //  intersectWatcher.d = intersects[3] && intersects[3].object.uuid;
+                //  intersectWatcher.e = intersects[4] && intersects[4].object.uuid;
+                //  intersectWatcher.f = intersects[5] && intersects[5].object.uuid;
 
                 }
 
