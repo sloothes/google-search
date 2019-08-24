@@ -620,14 +620,15 @@
             //  Use container.offsetWidth/Height when renderer container is not full window.
                	mouse.x = ( event.clientX / container.offsetWidth ) * 2 - 1;
                	mouse.y = - ( event.clientY / container.offsetHeight ) * 2 + 1;
+            }
+
         /*
-            //  Show link in bottom result bar.
+            //  Show link in bottom result bar. --> (watch.js)
                 if ( intersects.length && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
         */
-            }
     
             function onDocumentMouseDown( event ) {
                 event.preventDefault();
@@ -671,14 +672,15 @@
                 //  Follow intersects[0] pegman.
                     controls.focus(intersects[0].object, true); 
                 }
+            }
 
-            //  Show link in bottom result bar.
+        /*
+            //  Show link in bottom result bar. --> (watch.js)
                 if ( intersects.length && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
-
-            }
+        */
 
 
             function update() {
