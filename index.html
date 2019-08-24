@@ -92,7 +92,7 @@ document.body.onload = function(){
 
     if (navigator.serviceWorker) {
         navigator.serviceWorker.addEventListener("message", function(e){
-            console.log("Client Received Message:", e.data);
+        //  console.log("Client Received Message:", e.data);
 
             if ( e.data === "refresh" ){
 
