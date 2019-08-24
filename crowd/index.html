@@ -468,9 +468,38 @@
                 ],
 
             };
-            
+
+
             init( container );
             animate();
+
+        //  watch.js
+
+            var intersectWatch = {
+                a:null, 
+                b:null, 
+                c:null, 
+                d:null, 
+                e:null, 
+                f:null,
+            };
+
+            watch( intersectWatch, "a", function(prop, action, newvalue, oldvalue){
+
+                debugMode && console.log({
+                    "prop": prop,
+                    "action": action,
+                    "oldvalue": oldvalue,
+                    "newvalue": newvalue,
+                });
+
+                if ( newvalue && intersects[0].object.userData.result ) {
+                    pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
+                    modifyLinks( pegmanResultbar );
+                }
+
+            });
+
 
 
             function init( container ) {
@@ -661,8 +690,8 @@
             //  if (!!lastPegman) controls.focus(lastPegman, followUp);
             //  if (!!skydome) skydome.position.copy(camera.position);
             
-                if (!!keyboard) keyboard.update( delta * speed );
-                if (!!avatarHelper) avatarHelper.update( delta * speed );
+                if (keyboard) keyboard.update( delta * speed );
+                if (avatarHelper) avatarHelper.update( delta * speed );
                 
                 var cameraUnprojected = new THREE.Vector3();
             //  var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
@@ -674,12 +703,21 @@
 
                 intersects = ray.intersectObjects( targets );
             
-                if ( !!intersects[0] ) {
+                if ( intersects[0] ) {
                 //  Follow intersects[0] pegman.
                     if ( !!controls ) {
                         controls.focus(intersects[0].object, true); 
                     //  console.log(intersects[0]);
                     }
+
+                    intersectWatch.a = intersects[0].object.uuid;
+                    intersectWatch.b = intersects[1].object.uuid;
+                    intersectWatch.c = intersects[2].object.uuid;
+                    intersectWatch.d = intersects[3].object.uuid;
+                    intersectWatch.e = intersects[4].object.uuid;
+                    intersectWatch.f = intersects[5].object.uuid;
+
+                }
 
                 /*
                 //  Show link in bottom result bar.
@@ -689,7 +727,6 @@
                     }
                 */
 
-                }
                 
                 THREE.AnimationHandler.update( delta * speed );
                 
