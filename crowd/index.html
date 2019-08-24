@@ -590,7 +590,7 @@
                	mouse.y = - ( event.clientY / container.offsetHeight ) * 2 + 1;
 
             //  Show link in bottom result bar.
-                if ( !!intersects[0].object.userData.result ) {
+                if ( intersects.length && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
@@ -641,7 +641,7 @@
                 }
 
             //  Show link in bottom result bar.
-                if ( !!intersects[0].object.userData.result ) {
+                if ( intersects.length && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
