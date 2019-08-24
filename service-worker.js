@@ -7,7 +7,7 @@
     //  debugMode && console.log( e.request );
 
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
-            debugMode && console.log( e.request );
+        //  debugMode && console.log( e.request );
             self.clients.matchAll().then(function(clients){
                 var channel = new MessageChannel();
                 clients[0].postMessage("refresh", [channel.port2]);

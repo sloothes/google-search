@@ -485,14 +485,14 @@
             };
 
             watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
-
+            /*
                 debugMode && console.log({
                     "prop": prop,
                     "action": action,
                     "oldvalue": oldvalue,
                     "newvalue": newvalue,
                 });
-
+            */
                 if ( intersects[0] && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
