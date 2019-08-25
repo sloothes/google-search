@@ -49,39 +49,6 @@
 
         <div id="render-container"></div>
         <div id="pegman-result-bar"></div>  
-<!--
-        <div id="cam-measure-panel">
-            <div id="close-button" class="btn-close" onclick="hidePanel('cam-measure-panel');"></div><br>
-            <li><strong>frame:&nbsp;</strong><span id="framer">value</span></li><br>
-            <li><strong>Measurements:</strong>
-                <ul>
-                    <li>position&nbsp;x:<span id="cam-pos-x">value</span></li>
-                    <li>position&nbsp;y:<span id="cam-pos-y">value</span></li>
-                    <li>position&nbsp;z:<span id="cam-pos-z">value</span></li><br>
-                    <li>rotation&nbsp;x:<span id="cam-rot-x">value</span></li>
-                    <li>rotation&nbsp;y:<span id="cam-rot-y">value</span></li>
-                    <li>rotation&nbsp;z:<span id="cam-rot-z">value</span></li><br>
-                    <li>quaternion&nbsp;w:<span id="cam-quat-w">value</span></li>
-                    <li>quaternion&nbsp;x:<span id="cam-quat-x">value</span></li>
-                    <li>quaternion&nbsp;y:<span id="cam-quat-y">value</span></li>
-                    <li>quaternion&nbsp;z:<span id="cam-quat-z">value</span></li><br>
-                    <li>far:&nbsp;<span id="cam-far">value</span></li>
-                    <li>fov:&nbsp;<span id="cam-fov">value</span></li>
-                </ul>
-            </li><br>
-            <li><strong>Mouse Properties</strong>
-                <ul>
-                    <li>screen&nbsp;x:<span id="mouse-x">value</span></li>
-                    <li>screen&nbsp;y:<span id="mouse-y">value</span></li>
-                </ul>
-            </li>
-            <li><strong>Ray Properties</strong>
-                <ul>
-                    <li>intersects:<span id="intersects">value</span></li>
-                </ul>
-            </li>
-        </div>
--->
 
     <!-- WEBGL LIBRARIES -->
         
@@ -95,12 +62,11 @@
         <script src="/three/AnimationHandler.js"></script>
         <script src="/three/KeyFrameAnimation.js"></script>
 
-        
     <!-- GLOBAL FUNCTIONS -->
         
         <script>
             
-            window.debugMode = true;
+            window.debugMode = false;
             
             rightSidePinBtn = $("#right-side-pinbtn")[0];
             leftSidePinBtn = $("#left-side-pinbtn")[0];
@@ -477,30 +443,14 @@
 
             var intersectWatcher = {
                 a:null, 
-            //  b:null, 
-            //  c:null, 
-            //  d:null, 
-            //  e:null, 
-            //  f:null,
             };
 
             watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
-            /*
-                debugMode && console.log({
-                    "prop": prop,
-                    "action": action,
-                    "oldvalue": oldvalue,
-                    "newvalue": newvalue,
-                });
-            */
                 if ( intersects[0] && intersects[0].object.userData.result ) {
                     pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                     modifyLinks( pegmanResultbar );
                 }
-
             });
-
-
 
             function init( container ) {
 
@@ -528,15 +478,6 @@
                     laserLight.name = "LASERPOINTER"
                     scene.add( laserLight );
                 })();
-
-            /*
-                groundHelper = newGroundHelper();
-                groundHelper.visible = true;
-                axisCustomHelper = newCustomAxisHelper();
-                axisCustomHelper.visible = true;
-            //  originAxisHelper = newOriginAxisHelper();
-            //  originAxisHelper.visible = true;
-            */
 
             //  Skydome.
                 (function(){
@@ -587,7 +528,7 @@
                         console.log("geometry:", geometry);
                         console.log("materials:", materials); // multimaterial.
                     //  Create 100 dummy pegmen.
-                        for (var i=0; i < 30; i++) {
+                        for (var i=0; i < 50; i++) {
                             createResultPegman();
                         }
                     });
@@ -621,14 +562,6 @@
                	mouse.x = ( event.clientX / container.offsetWidth ) * 2 - 1;
                	mouse.y = - ( event.clientY / container.offsetHeight ) * 2 + 1;
             }
-
-        /*
-            //  Show link in bottom result bar. --> (watch.js)
-                if ( intersects.length && intersects[0].object.userData.result ) {
-                    pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
-                    modifyLinks( pegmanResultbar );
-                }
-        */
     
             function onDocumentMouseDown( event ) {
                 event.preventDefault();
@@ -674,17 +607,7 @@
                 }
             }
 
-        /*
-            //  Show link in bottom result bar. --> (watch.js)
-                if ( intersects.length && intersects[0].object.userData.result ) {
-                    pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
-                    modifyLinks( pegmanResultbar );
-                }
-        */
-
-
             function update() {
-            //  frameCount++ ;
                 
                 var delta = clock.getDelta();
                 var	time = clock.getElapsedTime();
@@ -713,23 +636,17 @@
                     //  console.log(intersects[0]);
                     }
 
-                    intersectWatcher.a = intersects[0] && intersects[0].object.uuid;
-                //  intersectWatcher.b = intersects[1] && intersects[1].object.uuid;
-                //  intersectWatcher.c = intersects[2] && intersects[2].object.uuid;
-                //  intersectWatcher.d = intersects[3] && intersects[3].object.uuid;
-                //  intersectWatcher.e = intersects[4] && intersects[4].object.uuid;
-                //  intersectWatcher.f = intersects[5] && intersects[5].object.uuid;
-
                 }
 
-                /*
+                intersectWatcher.a = intersects[0] && intersects[0].object.uuid; // important!
+
+            /*
                 //  Show link in bottom result bar.
                     if ( !!intersects[0].object.userData.result ) {
                         pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
                         modifyLinks( pegmanResultbar );
                     }
-                */
-
+            */
                 
                 THREE.AnimationHandler.update( delta * speed );
                 
@@ -791,30 +708,62 @@
         //  PEGMEN FUNCTIONS.
             
             function removePegmen(){
-            
+
+                scene.remove.apply(scene, pegmen);  //  important!
+
+            //  Animations.
+                while (THREE.AnimationHandler.animations){
+                    THREE.AnimationHandler.animations.shift().stop();
+                });
+
+                while (pegmen.length){
+                    (function(){
+                        var item = pegmen.shift();
+                    //  Dispose geometry. 
+                    //  item.geometry.dispose(); // (Geometry is the same uuid so we do not dispose geometry.)
+                    //  Dispose materials;
+                        for ( var i = 0; i < item.material.materials.length; i++ ) {
+                            item.material.materials[i].dispose();
+                        }
+                    })();
+                }
+
+            //  Reset lists.
+                morphs.length = 0;
+                skins.length = 0;
+                pegmen.length = 0;
+                targets.length = 0;
+                intersects.length = 0;
+                directionRandomPoints.length = 0;
+                THREE.AnimationHandler.animations.length = 0;
+
+            }
+
+        /*
                 pegmen.forEach(function(item, index){
-                    scene.remove(item);
+                //  scene.remove(item);
                 //  Dispose geometry. (Geometry is the same uuid so we do not dispose geometry.)
-                    //item.geometry.dispose();
+                    //  item.geometry.dispose();
                 //  Dispose materials;
                     for ( var i = 0; i < item.material.materials.length; i++ ) {
                         item.material.materials[i].dispose();
                     }
                 });
-            }
+        */
             
             function resetRuntime(){
             
             //  Clean up animations.
-                THREE.AnimationHandler.animations = [];
+                THREE.AnimationHandler.animations.length = 0;
 
             //  Reset lists.
-                intersects = [];
-                morphs = [];
-                skins = [];
-                pegmen = [];
-                targets = [];
-                directionRandomPoints = [];
+                morphs.length = 0;
+                skins.length = 0;
+                pegmen.length = 0;
+                targets.length = 0;
+                intersects.length = 0;
+                directionRandomPoints.length = 0;
+
             }
             
             function pegman_init(options) {
@@ -1066,122 +1015,7 @@
 
                 return group;
             }
-    /*
-            function newOriginAxisHelper(){
-                var group = new THREE.Group();
 
-                scene.add(group);
-                group.name = "ORIGINS";
-
-                var materialFace = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-            	var materialSide = new THREE.MeshBasicMaterial( { color: 0x888888 } );
-            	var materialArray = [ materialFace, materialSide ];
-                var textMaterial = new THREE.MeshFaceMaterial(materialArray);
-
-                h0Style = {
-                    size: 40, height: 2, curveSegments: 10, font: "helvetiker", weight: "normal", style: "normal", 
-                    bevelThickness: 1, bevelSize: 2, bevelEnabled: false, material: 0, extrudeMaterial: 1
-                };
-            	h1Style = { 
-                    size: 20, height: 1, curveSegments: 10, font: "helvetiker", weight: "normal", style: "normal", 
-                    bevelThickness: 1, bevelSize: 2, bevelEnabled: false, material: 0, extrudeMaterial: 1 
-                };
-            	h2Style = { 
-                    size: 10, height: 1, curveSegments: 10, font: "helvetiker", weight: "normal", style: "normal", 
-                    bevelThickness: 1, bevelSize: 2, bevelEnabled: false, material: 0, extrudeMaterial: 1 
-                };
-            	h3Style = { 
-                    size: 5, height: 0.5, curveSegments: 10, font: "helvetiker", weight: "normal", style: "normal", 
-                    bevelThickness: 1, bevelSize: 2, bevelEnabled: false, material: 0, extrudeMaterial: 1 
-                };
-
-                // "+x"
-                var thetext = "+x";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( 1000, 20, 0 );
-            	textMesh.rotation.x = 0;
-            	textMesh.rotation.y = -Math.PI * 0.5;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh); 
-
-                // "-x"
-                var thetext = "-x";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( -1000, 20, 0 );
-            	textMesh.rotation.x = 0;
-            	textMesh.rotation.y = Math.PI * 0.5;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh); 
-
-                // "+z"
-                var thetext = "+z";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( 0, 20, 1000 );
-            	textMesh.rotation.x = 0;
-            	textMesh.rotation.y = -Math.PI;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh); 
-
-                // "-z"
-                var thetext = "-z";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( 0, 20, -1000 );
-            	textMesh.rotation.x = 0;
-            	textMesh.rotation.y = 0;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh); 
-
-                // "+y"
-                var thetext = "+y";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( 0, 1000, 0 );
-            	textMesh.rotation.x = Math.PI * 0.5;
-            	textMesh.rotation.y = 0;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh); 
-
-                // "-y"
-                var thetext = "-y";
-            	var textGeometry = new THREE.TextGeometry( thetext, h1Style );
-            	var textMesh = new THREE.Mesh(textGeometry, textMaterial );
-            	textGeometry.computeBoundingBox();
-            	var textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            	textMesh.scale.set( 2, 2, 5); 
-            	textMesh.geometry.center();
-            	textMesh.position.set( 0, -1000, 0 );
-            	textMesh.rotation.x = -Math.PI * 0.5;
-            	textMesh.rotation.y = 0;
-            	textMesh.rotation.z = 0;
-            	group.add(textMesh);
-
-                return group;
-            }
-    */
             function deselectSELECTED(){
                 if ( SELECTED ) {
                     if ( SELECTED.children[0] ) SELECTED.children[0].visible = false;

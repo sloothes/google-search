@@ -105,7 +105,7 @@
 
     function start(){
         debugMode && console.log( "starting search." );
-        scene.remove.apply(scene, pegmen);  //  important!
+        viewer.contentWindow.removePegmen();
     }
 
     function ready(){
