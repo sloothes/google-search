@@ -1,8 +1,11 @@
 //  google webspace search sw.js
 
-    self.version = 1.1;
+    self.version = 1.2;
     var debugMode = true;
 
+    unistall();
+
+/*
     self.addEventListener("fetch", function(e){
     //  debugMode && console.log( e.request );
 
@@ -30,6 +33,7 @@
         self.clients.claim();
 
     });
+*/
 
     function send_message_to_client(client, msg){
         return new Promise(function(resolve, reject){
