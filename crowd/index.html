@@ -68,9 +68,8 @@
         </style>
 
         <script>var debugMode = false;</script>
-        <script src="watch.js"></script>
+
         <script src="/js/jquery.min.js"></script>
-        <!-- r71 -> r73 -> r78 -->
         <script src="/three/three.js"></script> 
         <script src="/three/EditorControls.js"></script>
         <script src="/three/Detector.js"></script>
@@ -80,6 +79,9 @@
         <script src="/three/AnimationHandler.js"></script>
         <script src="/three/KeyFrameAnimation.js"></script>
 
+        <script src="watch.js"></script>
+        <script src="index.js"></script>
+        <script src="helpers.js"></script>
         
     </head>
     
@@ -89,13 +91,13 @@
 
         <div id="results-panel">
             <div id="pegman-result-bar"></div>  
-        <div>
+        </div>
         
 
     <!-- GLOBAL FUNCTIONS -->
         
         <script>
-
+        /*
             rightSidePinBtn = $("#right-side-pinbtn")[0];
             leftSidePinBtn = $("#left-side-pinbtn")[0];
             introPinBtn = $("#pinbtn")[0];
@@ -169,13 +171,13 @@
                 googleCapacity = Number(capacityinput.value);
                 debugMode && console.log("googleCapacity:", googleCapacity);
             }
-            
+        */
         </script>
         
     <!-- SCENE -->
         
         <script>
-
+        /*
             if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
             var camera, 
@@ -665,14 +667,6 @@
                 }
 
                 intersectWatcher.a = !!intersects[0] && intersects[0].object.uuid; // important!
-
-            /*
-                //  Show link in bottom result bar.
-                    if ( !!intersects[0].object.userData.result ) {
-                        pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
-                        modifyLinks( pegmanResultbar );
-                    }
-            */
                 
                 THREE.AnimationHandler.update( delta * speed );
                 
@@ -764,18 +758,6 @@
                 THREE.AnimationHandler.animations.length = 0;
 
             }
-
-        /*
-                pegmen.forEach(function(item, index){
-                //  scene.remove(item);
-                //  Dispose geometry. (Geometry is the same uuid so we do not dispose geometry.)
-                    //  item.geometry.dispose();
-                //  Dispose materials;
-                    for ( var i = 0; i < item.material.materials.length; i++ ) {
-                        item.material.materials[i].dispose();
-                    }
-                });
-        */
             
             function resetRuntime(){
             
@@ -1129,7 +1111,7 @@
                     }
                 });
             }
-
+        */
         </script>
 
     </body>
