@@ -459,6 +459,7 @@
                 scene = new THREE.Scene();
                 projector = new THREE.Projector();
                 controls = new THREE.EditorControls(camera);
+                camera.lootAt(controls.center);
 
                 (function(){
                     light0 = newDirectionalLight(0xffffff, 0, 0, 1000, 0.5);
