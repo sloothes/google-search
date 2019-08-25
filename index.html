@@ -76,22 +76,25 @@
 
 
 <script>
-
-//  const cx = "013151438370468652337:0mozxitt4ka";
-//  const src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
+(function(){
 
     const viewer = document.getElementById("viewer");
-    const searchButton = $("button.gsc-search-button.gsc-search-button-v2").get(0);
-
-    const scene = viewer.contentWindow.scene;
     const contentWindow = viewer.contentWindow;
-
+//  const cx = "013151438370468652337:0mozxitt4ka";
+//  const src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
     const resultSelector = ".gs-result";
     const webResultSelector = ".gs-webResult";
     const expansionAreaSelector =".gsc-expansionArea";
     const resultsBoxVisibleSelector = ".gsc-resultsbox-visible";
 
-    var pegmen = contentWindow.pegmen;
+    var scene, pegmen;
+
+    $(viewer.contentWindow).on("load", function(){
+        scene = viewer.contentWindow.scene;
+        pegmen = contentWindow.pegmen;
+    });
+
+//  "https:https://developers.google.com/custom-search/docs/element"
 
     window.__gcse = {
     //  parsetags: "explicit", // Defaults to 'onload'
@@ -135,6 +138,8 @@
             contentWindow.createResultPegman( result );
         });
     }
+
+});
 
 </script>
 
