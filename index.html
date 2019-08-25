@@ -84,12 +84,13 @@
     const expansionAreaSelector =".gsc-expansionArea";
     const resultsBoxVisibleSelector = ".gsc-resultsbox-visible";
 
-    var scene, pegmen, camera;
+    var scene, pegmen, camera, resultsPanel;
 
-    $(viewer.contentWindow).on("load", function(){
+    $(contentWindow).on("load", function(){
         scene = contentWindow.scene;
         pegmen = contentWindow.pegmen;
         camera = contentWindow.camera;
+        resultsPanel = this.document.getElementById("results-panel");
     });
 
 //  "https:https://developers.google.com/custom-search/docs/element"
@@ -115,6 +116,7 @@
 
     function rendered(){
         debugMode && console.log( "results rendered." );
+        resultsPanel.style.display = "block"; // important!
         $(".gsc-resultsbox-visible")
         .find(".gsc-expansionArea")
         .find(".gs-webResult.gs-result")
