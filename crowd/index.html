@@ -525,8 +525,8 @@
                     loader.load( pegmanPath, function ( gmt, mtl ) {
                         geometry = gmt;   // important! global.
                         materials = mtl;  // important! global.
-                        console.log("geometry:", geometry);
-                        console.log("materials:", materials); // multimaterial.
+                        debugMode && console.log("geometry:", geometry);
+                        debugMode && console.log("materials:", materials);
                     //  Create 100 dummy pegmen.
                         for (var i=0; i < 50; i++) {
                             createResultPegman();
