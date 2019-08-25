@@ -77,13 +77,14 @@
 
 
 <script>
+(function(){
 
     const viewer = document.getElementById("viewer");
     const contentWindow = viewer.contentWindow;
-    const resultSelector = ".gs-result";
-    const webResultSelector = ".gs-webResult";
-    const expansionAreaSelector =".gsc-expansionArea";
-    const resultsBoxVisibleSelector = ".gsc-resultsbox-visible";
+    const gsresult = ".gs-result";
+    const gswebResult = ".gs-webResult";
+    const gscexpansionArea =".gsc-expansionArea";
+    const gscresultsBoxVisible = ".gsc-resultsbox-visible";
 
     var scene, pegmen, camera, resultsPanel;
 
@@ -118,16 +119,16 @@
     function rendered(){
         debugMode && console.log( "results rendered." );
         resultsPanel.style.display = "block"; // important!
-        $(".gsc-resultsbox-visible")
-        .find(".gsc-expansionArea")
-        .find(".gs-webResult.gs-result")
-        .toArray().forEach(function(result){
+        $(gscresultsBoxVisible).find(gscexpansionArea)
+        .find(gsresult + gswebResult).toArray()
+        .forEach(function(result){
             debugMode && console.log(result);
             contentWindow.createResultPegman( result );
         });
         if (pegmen.length) camera.lookAt(pegmen[0].position); // optional!
     }
 
+})();
 </script>
 
 </body>
