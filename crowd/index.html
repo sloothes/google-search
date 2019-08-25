@@ -710,7 +710,7 @@
                 scene.remove.apply(scene, pegmen);  //  important!
 
             //  Animations.
-                while (THREE.AnimationHandler.animations){
+                while (THREE.AnimationHandler.animations.length){
                     THREE.AnimationHandler.animations.shift().stop();
                 }
 
