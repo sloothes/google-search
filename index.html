@@ -10,26 +10,23 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta name="description" contents="It is fun, it is fast and is easy. Google and get the results as 3D pegmen">
 
-    <title>google search webspace (v2.1)</title>
+    <title>Google Search Webspace (v2.1)</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
 
     <script>
-        var debugMode = true;
+        var debugMode = false;
         if (navigator.serviceWorker) {
-        //  debugMode && console.log(navigator.serviceWorker.controller);
+            debugMode && console.log(navigator.serviceWorker.controller);
         }
     </script>
 
-<!--script src="/google-search/sw.js"></script -->
-    <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/bootbox.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-
-    <script src="https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script>
+    <script src="//cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script>
 
 </head>
 
@@ -97,16 +94,7 @@
 //  "https:https://developers.google.com/custom-search/docs/element"
 
     window.__gcse = {
-    //  parsetags: "explicit", // Defaults to 'onload'
-    //  initializationCallback: init,
         searchCallbacks: {
-        /*
-            image: {
-                starting: myImageSearchStartingCallback,
-                ready: myImageResultsReadyCallback,
-                rendered: myImageResultsRenderedCallback,
-            },
-        */
             web: {
                 starting: start,
                 ready: ready,
@@ -114,10 +102,6 @@
             },
         }
     };
-
-    function init(){
-        debugMode && console.log( "initialization." );
-    }
 
     function start(){
         debugMode && console.log( "starting search." );
@@ -139,61 +123,6 @@
         });
     }
 
-</script>
-
-
-<script>
-/*
-document.body.onload = function(){
-
-    var n = 0;
-    debugMode && console.log( $("button.gsc-search-button.gsc-search-button-v2").get(0) );
-    
-    const viewer = document.getElementById("viewer");
-    const searchButton = $("button.gsc-search-button.gsc-search-button-v2").get(0);
-
-    $(searchButton).on("click", function(){
-        //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
-        $(".gsc-resultsbox-visible")
-            .find(".gsc-expansionArea")
-            .find(".gs-webResult.gs-result")
-            .toArray().forEach(function(result){
-            debugMode && console.log(result);
-        });
-    });
-
-    if (navigator.serviceWorker) {
-        navigator.serviceWorker.addEventListener("message", function(e){
-        //  console.log("Client Received Message:", e.data);
-
-            if ( e.data === "refresh" ){
-
-                var scene = viewer.contentWindow.scene;
-                var contentWindow = viewer.contentWindow;
-                var pegmen = contentWindow.pegmen;
-
-                if (n == 0) scene.remove.apply(scene, pegmen);  //  important!
-
-                n++;
-
-                var results;
-                setTimeout(function(){
-                    results = $(".gsc-resultsbox-visible")
-                    .find(".gsc-expansionArea")
-                    .find(".gs-webResult.gs-result")
-                    .toArray();
-                    results.forEach(function(result){
-                    //  debugMode && console.log(result);
-                        contentWindow.createResultPegman( result );
-                    });
-                }, 0);
-
-            }
-
-        });
-    }
-}
-*/
 </script>
 
 </body>
