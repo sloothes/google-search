@@ -11,53 +11,65 @@
         <link rel="stylesheet" href="/css/bootstrap-v3.3.7.min.css">
 
         <style>
+
             * { box-sizing:border-box; -moz-box-sizing:border-box; margin:0px; padding:0px;}
             html, body {width: 100%; height: 100%;}
             html { color:#000; font-size:13px; background-color:#eee; margin:0px; overflow:hidden; }
             body { background-color: #ffffff; margin:0; padding:0px; overflow:hidden; font-family:arial, san-serif; }
+
             #render-container {
                 position:absolute; top:0px; left:0px; bottom:0px; right:0px; width:100%; padding:0px;
                 margin:0px; border:none; display:block; background-color: #dedede; overflow:hidden;
             }
-            #cam-measure-panel {
-                width:auto; height:auto; position:absolute; left:10px; top:50px; 
-                padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; 
-                background-color:rgba(0,0,0, 0.5); color:#fff; text-align:left; font-size:1em;
-                border:4px solid #ffffff; border-radius:12px; display:none;
-            }
+
+       /*   #pegman-result-bar  */
+
             #pegman-result-bar {
-                position:fixed; max-width:370px; bottom:0px; left:0px; max-height:30%;
-                margin:0px; padding:15px 15px 15px 15px; background-color: #00000080; color:#ffffff;
-                border-radius:0px 9px 0px 0px; overflow:auto; display:block;
+                color:#ffffff;
+                width:100%;
+                height:100%;
+                overflow-x:hidden; 
+                background-color:none;
             }
-            #pauser {
-                position:absolute; bottom:50%; left:20%; right:20%; 
-                padding:0px; margin:auto; line-height: 1.1em;
-                color:#ffffff; border: 0.0em solid #ffffff; border-radius:0.1em; 
-                font-size:4em; text-align:center; text-vertical-align:middle;
-                text-shadow:0.05em 0.05em 0.08em #000; opacity:0.5; 
+
+            #pegman-result-bar img {
+                max-width:100%;
             }
-            @media all and ( max-width: 400px ) {
-                #pegman-result-bar {
+
+            #results-panel {
+                position:fixed; 
+                max-width:370px; 
+                bottom:0px; 
+                left:0px; 
+                max-height:30%;
+                margin:0px; 
+                padding:15px; 
+                background-color:#00000080; 
+                border-radius:0px 9px 0px 0px; 
+                display:block;
+            }
+
+            @media all and ( max-width: 380px ) {
+                #results-panel {
                     max-width:100%;
                     border-radius:9px 9px 0px 0px;
                 }
             }
+
+            @media all and ( max-width: 670px ) {
+                #results-panel {
+                    max-width:40%;
+                    height:300px;
+                    max-height:300px;
+                    border-radius:0px 9px 0px 0px;
+                }
+            }
+
         </style>
-        
+
+        <script>var debugMode = false;</script>
         <script src="watch.js"></script>
         <script src="/js/jquery.min.js"></script>
-
-        
-    </head>
-    
-    <body>
-
-        <div id="render-container"></div>
-        <div id="pegman-result-bar"></div>  
-
-    <!-- WEBGL LIBRARIES -->
-        
         <!-- r71 -> r73 -> r78 -->
         <script src="/three/three.js"></script> 
         <script src="/three/EditorControls.js"></script>
@@ -68,12 +80,22 @@
         <script src="/three/AnimationHandler.js"></script>
         <script src="/three/KeyFrameAnimation.js"></script>
 
+        
+    </head>
+    
+    <body>
+
+        <div id="render-container"></div>
+
+        <div id="results-panel">
+            <div id="pegman-result-bar"></div>  
+        <div>
+        
+
     <!-- GLOBAL FUNCTIONS -->
         
         <script>
-            
-            window.debugMode = false;
-            
+
             rightSidePinBtn = $("#right-side-pinbtn")[0];
             leftSidePinBtn = $("#left-side-pinbtn")[0];
             introPinBtn = $("#pinbtn")[0];
