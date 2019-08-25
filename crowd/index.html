@@ -26,9 +26,9 @@
                 border:4px solid #ffffff; border-radius:12px; display:none;
             }
             #pegman-result-bar {
-                position:absolute; max-width:370px; bottom:0px; left:0px; max-height:30%;
+                position:fixed; max-width:370px; bottom:0px; left:0px; max-height:30%;
                 margin:0px; padding:15px 15px 15px 15px; background-color: #00000080; color:#ffffff;
-                border-radius:0px 9px 0px 9px; overflow:auto; display:block;
+                border-radius:0px 9px 0px 0px; overflow:auto; display:block;
             }
             #pauser {
                 position:absolute; bottom:50%; left:20%; right:20%; 
@@ -36,6 +36,12 @@
                 color:#ffffff; border: 0.0em solid #ffffff; border-radius:0.1em; 
                 font-size:4em; text-align:center; text-vertical-align:middle;
                 text-shadow:0.05em 0.05em 0.08em #000; opacity:0.5; 
+            }
+            @media all and ( max-width: 400px ) {
+                #pegman-result-bar {
+                    max-width:100%;
+                    border-radius:9px 9px 0px 0px;
+                }
             }
         </style>
         
