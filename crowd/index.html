@@ -225,6 +225,16 @@
             const skydomePath = "skydomes/skydome002.jpg";
             const pegmanPath  = "models/human_walk_0_female.js";
 
+        //  watch.js
+
+            var intersectWatcher = { a:null }; // important!
+            watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
+                if ( intersects[0] && intersects[0].object.userData.result ) {
+                    pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
+                    modifyLinks( pegmanResultbar );
+                }
+            });
+
             const data = {
 
                 "fps":25,
@@ -438,19 +448,6 @@
 
             init( container );
             animate();
-
-        //  watch.js
-
-            var intersectWatcher = {
-                a:null, 
-            };
-
-            watch( intersectWatcher, "a", function(prop, action, newvalue, oldvalue){
-                if ( intersects[0] && intersects[0].object.userData.result ) {
-                    pegmanResultbar.innerHTML = intersects[0].object.userData.result.innerHTML;
-                    modifyLinks( pegmanResultbar );
-                }
-            });
 
             function init( container ) {
 
