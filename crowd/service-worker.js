@@ -1,7 +1,8 @@
 //  crowd service-worker.js
 
-    self.version = 1.0;
+    self.version = 1.1;
     var debugMode = true;
+    var cacheName = "google-search";
 
     const assets = [
         "/js/watch.js",
@@ -20,8 +21,7 @@
     ];
 
     self.addEventListener( "install", function (e) {
-        caches.open("google-search")
-        .then(function(cache){
+        caches.open(cacheName).then(function(cache){
             cache.addAll( assets );
         });
     });
@@ -31,9 +31,10 @@
     });
 
     function cacheFirst(request) {
-        return caches.match(request)
-        .then(function(response){
-            return response || fetch(request);
+        return caches.open(cacheName).then(function(cache){
+            return cache.match(request).then(function(response){
+                return response || fetch(request);
+            });
         });
     }
 
