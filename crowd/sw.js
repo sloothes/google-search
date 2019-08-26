@@ -5,8 +5,8 @@
     if ( serviceWorker ) {
 
         serviceWorkerRegistration( serviceWorker, {
-            opt: {scope: "/google-search/"},
-            url: "/google-search/service-worker.js",
+            opt: {scope: "/google-search/crowd/"},
+            url: "/google-search/crowd/service-worker.js",
         });
 
     }
@@ -42,10 +42,10 @@
 
             });
 
-            //  Refresh to activate the worker.
-            //  if (!reg.active) {
-            //      location.reload(); return;
-            //  } 
+        //  Refresh to activate the worker.
+            if (!reg.active) {
+                location.reload(); return;
+            }
 
         }).catch(function(err) { 
             console.error(err);
