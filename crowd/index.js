@@ -774,13 +774,13 @@
 
     function disableControls(){
         controls.enabled = false;
-        //if ( pauser ) pauser.style.display = "";
-        //if ( pauser ) pauser.innerHTML = innerHtml;
+        //  if ( pauser ) pauser.style.display = "";
+        //  if ( pauser ) pauser.innerHTML = innerHtml;
     }
 
     function enableControls(){
         controls.enabled = true;
-        //if ( pauser ) pauser.style.display = "none";
+        //  if ( pauser ) pauser.style.display = "none";
     }
 
     function toggleVisible(object){
@@ -860,8 +860,8 @@
 
         group.add( lineAxisXpos );
         group.add( lineAxisXneg );
-        //group.add( lineAxisYpos );
-        //group.add( lineAxisYneg );
+        //  group.add( lineAxisYpos );
+        //  group.add( lineAxisYneg );
         group.add( lineAxisZpos );
         group.add( lineAxisZneg );
 
@@ -877,8 +877,8 @@
     }
 
     function wildcardAnyObjectAndChild( object, callback ){
-        // callback: function(item, index){};
-        // Find any children of an object and object itself.
+    //  callback: function(item, index){};
+    //  Find any children of an object and object itself.
 
         if ( object && callback ){
 
@@ -955,3 +955,4 @@
             }
         });
     }
+
