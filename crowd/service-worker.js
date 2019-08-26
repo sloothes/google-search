@@ -14,8 +14,8 @@
         "/three/Animation.js",
         "/three/AnimationHandler.js",
         "/three/KeyFrameAnimation.js",
-        "./skydomes/skydome002.jpg",
-        "./models/human_walk_0_female.js",
+        "/google-search/crowd/skydomes/skydome002.jpg",
+        "/google-search/crowd/models/human_walk_0_female.js",
         "/css/bootstrap-v3.3.7.min.css",
     ];
 
