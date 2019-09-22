@@ -67,8 +67,8 @@
             return self.clients.matchAll();
         }).then(function(clients) {
             clients.forEach(function(client){
-                client.navigate(client.url);  // it will re-install on reload!
-                console.log(`service worker unistalled from client "${client.url}"`);
+                client.navigate(client.url);  // will not be re-installed on reload!
+                console.log("service worker unistalled from client " + client.url);
             });
         });
     }
